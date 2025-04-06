@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import BookCard from "./book-card";
 import { Button } from "../ui/button";
 
-const BookList = ({ searchTerm }) => {
+const BookList = ({ searchTerm, filter }) => {
   const [books, setBooks] = useState([]);
+  const [filterdBook, setFilteredBook] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [url, setUrl] = useState("https://gutendex.com/books?page=1");
@@ -12,12 +13,22 @@ const BookList = ({ searchTerm }) => {
 
   useEffect(() => {
     if (!searchTerm) return;
-
     setUrl(`https://gutendex.com/books?search=${searchTerm}`);
   }, [searchTerm]);
 
   useEffect(() => {
-    console.log(url);
+    if (!books) return;
+
+    const updatedBooks = books.filter((book) => {
+      let match = book?.subjects.filter((subject) =>
+        subject?.toLowerCase().includes(filter.toLowerCase())
+      );
+      return match.length > 0;
+    });
+    setFilteredBook(updatedBooks);
+  }, [filter, books]);
+
+  useEffect(() => {
     setLoading(true);
     setBooks([]);
     fetch(url)
@@ -29,6 +40,7 @@ const BookList = ({ searchTerm }) => {
           title: book?.title,
           author: book?.authors[0]?.name,
           image: book?.formats["image/jpeg"],
+          subjects: book?.subjects,
         }));
 
         setBooks(books);
@@ -36,20 +48,18 @@ const BookList = ({ searchTerm }) => {
         setPreviousPage(data?.previous);
         setLoading(false);
       });
-  }, [url, searchTerm]);
-
-  console.log(nextPage);
+  }, [url]);
 
   return (
-    <div className="p-14 flex justify-center items-center flex-col gap-4">
+    <div className="p-8 flex justify-center items-center flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {/* Loading  */}
 
         {loading && <div> Loading .....</div>}
 
-        {books.map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
+        {filter
+          ? filterdBook.map((book) => <BookCard key={book.id} book={book} />)
+          : books.map((book) => <BookCard key={book.id} book={book} />)}
 
         {/* No books found */}
         {!loading && books.length === 0 && <div>No books found</div>}
