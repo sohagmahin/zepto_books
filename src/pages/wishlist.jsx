@@ -1,5 +1,6 @@
-import { Trash2 } from "lucide-react";
+import { Delete, Trash, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { Button } from "../components/ui/button";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -47,7 +48,20 @@ const Wishlist = () => {
             </div>
           );
         })}
-
+        {wishlist && wishlist.length > 0 && (
+          <div className="flex justify-end">
+            <Button
+              className="w-40 bg-red-500 hover:cursor-pointer"
+              onClick={() => {
+                setWishlist([]);
+                localStorage.setItem("wishlist", []);
+              }}
+            >
+              <Trash2 />
+              Clear Wishlist
+            </Button>
+          </div>
+        )}
         {wishlist.length <= 0 && (
           <p className="self-center pt-10">No available wishlist!</p>
         )}
