@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BookCard from "./book-card";
 import { Button } from "../ui/button";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const [url, setUrl] = useState("https://gutendex.com/books?page=1");
   const [nextPage, setNextPage] = useState(false);
@@ -42,7 +44,9 @@ const BookList = () => {
         {loading && <div> Loading .....</div>}
 
         {books.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <div key={book?.id} onClick={() => navigate(`/book/${book?.id}`)}>
+            <BookCard book={book} />
+          </div>
         ))}
 
         {/* No books found */}

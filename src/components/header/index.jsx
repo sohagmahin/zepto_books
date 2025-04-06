@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SearchIcon, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -6,11 +7,11 @@ const Header = () => {
     <header className="w-full border-b">
       <div className="max-w-7xl lg:mx-auto p-5 md:px-10 w-full flex justify-between">
         <div className="flex-start">
-          <a href={"/"} className="flex-start">
+          <Link to="/" className="flex-start">
             <span className="hidden lg:block font-bold text-2xl ml-3">
               Zepto Books
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Product search bar */}
@@ -26,9 +27,9 @@ const Header = () => {
         </div>
 
         <Button asChild variant="ghost">
-          <a href="/cart">
-            <ShoppingCart /> WishList
-          </a>
+          <Link to="/wishlist">
+            <ShoppingCart /> Wishlist
+          </Link>
         </Button>
       </div>
     </header>
