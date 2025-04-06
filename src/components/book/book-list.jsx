@@ -29,6 +29,7 @@ const BookList = ({ searchTerm, filter }) => {
   }, [filter, books]);
 
   useEffect(() => {
+    if (!url) return;
     setLoading(true);
     setBooks([]);
     fetch(url)
@@ -67,12 +68,12 @@ const BookList = ({ searchTerm, filter }) => {
 
       {/* pagination */}
       {!loading && (
-        <div
-          className="flex justify-center gap-4"
-          onClick={() => setUrl(previousPage)}
-        >
+        <div className="flex justify-center gap-4">
           {previousPage && (
-            <Button className="bg-blue-500 text-white p-2 rounded-md">
+            <Button
+              className="bg-blue-500 text-white p-2 rounded-md"
+              onClick={() => setUrl(previousPage)}
+            >
               Previous Page
             </Button>
           )}
