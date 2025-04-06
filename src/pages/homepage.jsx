@@ -34,7 +34,7 @@ const HomePage = () => {
           className="w-full sm:max-w-[300px] p-2 border border-gray-300 rounded"
         />
       </div>
-      <div className="flex justify-end pr-30">
+      <div className="flex justify-center sm:justify-end pr-30">
         <Select
           value={filter}
           onValueChange={(value) => {
