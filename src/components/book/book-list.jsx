@@ -2,13 +2,19 @@ import { useEffect, useState } from "react";
 import BookCard from "./book-card";
 import { Button } from "../ui/button";
 
-const BookList = () => {
+const BookList = ({ searchTerm }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [url, setUrl] = useState("https://gutendex.com/books?page=1");
   const [nextPage, setNextPage] = useState(false);
   const [previousPage, setPreviousPage] = useState(false);
+
+  useEffect(() => {
+    if (!searchTerm) return;
+
+    setUrl(`https://gutendex.com/books?search=${searchTerm}`);
+  }, [searchTerm]);
 
   useEffect(() => {
     console.log(url);
@@ -30,7 +36,7 @@ const BookList = () => {
         setPreviousPage(data?.previous);
         setLoading(false);
       });
-  }, [url]);
+  }, [url, searchTerm]);
 
   console.log(nextPage);
 

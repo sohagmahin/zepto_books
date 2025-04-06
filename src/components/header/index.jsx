@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SearchIcon, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 
 const Header = () => {
@@ -12,18 +12,6 @@ const Header = () => {
               Zepto Books
             </span>
           </Link>
-        </div>
-
-        {/* Product search bar */}
-        <div className="relative w-[300px] flex">
-          <input
-            type="text"
-            placeholder="Search for books..."
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <div className="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400">
-            <SearchIcon />
-          </div>
         </div>
 
         <Button asChild variant="ghost">
