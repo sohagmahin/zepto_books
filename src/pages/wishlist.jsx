@@ -34,8 +34,8 @@ const Wishlist = () => {
                     className="max-h-full max-w-full object-cover"
                   />
                 </div>
-                <div>
-                  <p className="font-semibold">{book?.title}</p>
+                <div className="p-4">
+                  <p className="font-semibold tracking-tight">{book?.title}</p>
                   <p className="tracking-tight opacity-60">{book?.author}</p>
                 </div>
               </div>
