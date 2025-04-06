@@ -43,7 +43,7 @@ const ProductCard = ({ book }) => {
           <img
             src={book.image}
             alt={book.name}
-            className="object-cover w-full h-full"
+            className="object-contain w-full h-[300px]"
           />
         </div>
       </CardHeader>
