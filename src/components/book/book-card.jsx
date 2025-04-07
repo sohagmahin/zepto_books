@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const ProductCard = ({ book }) => {
+const ProductCard = ({ book, setWishlistCount }) => {
   const navigate = useNavigate();
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -14,10 +14,12 @@ const ProductCard = ({ book }) => {
       wishList.push(book);
       localStorage.setItem("wishlist", JSON.stringify(wishList));
       setIsWishlisted(true);
+      setWishlistCount(wishList.length);
     } else {
       const updatedWishList = wishList.filter((item) => item.id !== book.id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishList));
       setIsWishlisted(false);
+      setWishlistCount(updatedWishList.length);
     }
   };
 
@@ -52,10 +54,7 @@ const ProductCard = ({ book }) => {
           <h3 className="font-semibold text-lg line-clamp-1">{book.title}</h3>
           <p className="text-sm text-muted-foreground">{book.author}</p>
           <button
-            onClick={() => {
-              console.log("wishlist clicked ....");
-              handleWishlist();
-            }}
+            onClick={handleWishlist}
             className="absolute bottom-0 right-0 bg-white rounded-full shadow p-1"
           >
             <Heart

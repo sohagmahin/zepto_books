@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BookCard from "./book-card";
 import { Button } from "../ui/button";
 
-const BookList = ({ searchTerm, filter }) => {
+const BookList = ({ searchTerm, filter, setWishlistCount }) => {
   const [books, setBooks] = useState([]);
   const [filterdBook, setFilteredBook] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +60,13 @@ const BookList = ({ searchTerm, filter }) => {
 
         {filter
           ? filterdBook.map((book) => <BookCard key={book.id} book={book} />)
-          : books.map((book) => <BookCard key={book.id} book={book} />)}
+          : books.map((book) => (
+              <BookCard
+                key={book.id}
+                book={book}
+                setWishlistCount={setWishlistCount}
+              />
+            ))}
 
         {/* No books found */}
         {!loading && books.length === 0 && <div>No books found</div>}

@@ -2,13 +2,20 @@ import { Delete, Trash, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 
-const Wishlist = () => {
+const Wishlist = ({ setWishlistCount }) => {
   const [wishlist, setWishlist] = useState([]);
 
   const removeWishList = (id) => {
     const updatedWishlist = wishlist.filter((item) => item.id !== id);
     setWishlist(updatedWishlist);
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    setWishlistCount(updatedWishlist.length);
+  };
+
+  const removeAllWishlist = () => {
+    setWishlist([]);
+    localStorage.setItem("wishlist", []);
+    setWishlistCount(0);
   };
 
   useEffect(() => {
@@ -52,10 +59,7 @@ const Wishlist = () => {
           <div className="flex justify-end">
             <Button
               className="w-40 bg-red-500 hover:cursor-pointer"
-              onClick={() => {
-                setWishlist([]);
-                localStorage.setItem("wishlist", []);
-              }}
+              onClick={() => removeAllWishlist()}
             >
               <Trash2 />
               Clear Wishlist

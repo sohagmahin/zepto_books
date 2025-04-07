@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const HomePage = () => {
+const HomePage = ({ setWishlistCount }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState(localStorage.getItem("filter") || "");
 
@@ -71,7 +71,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      <BookList searchTerm={searchTerm} filter={filter} />
+      <BookList
+        searchTerm={searchTerm}
+        filter={filter}
+        setWishlistCount={setWishlistCount}
+      />
     </>
   );
 };
