@@ -51,13 +51,25 @@ const BookList = ({ searchTerm, filter, setWishlistCount }) => {
       });
   }, [url]);
 
+  if (loading)
+    return (
+      <div className="flex justify-center items-end pt-20"> Loading .....</div>
+    );
+
+  // book not found
+  if (!loading) {
+    if (books.length === 0 || filterdBook.length === 0) {
+      return (
+        <div className="flex justify-center items-end pt-20">
+          No book available .....
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="p-8 flex justify-center items-center flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {/* Loading  */}
-
-        {loading && <div> Loading .....</div>}
-
         {filter
           ? filterdBook.map((book) => <BookCard key={book.id} book={book} />)
           : books.map((book) => (
@@ -67,9 +79,6 @@ const BookList = ({ searchTerm, filter, setWishlistCount }) => {
                 setWishlistCount={setWishlistCount}
               />
             ))}
-
-        {/* No books found */}
-        {!loading && books.length === 0 && <div>No books found</div>}
       </div>
 
       {/* pagination */}
