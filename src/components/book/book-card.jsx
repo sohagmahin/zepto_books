@@ -34,16 +34,16 @@ const ProductCard = ({ book }) => {
   }, [book.id]);
 
   return (
-    <Card className="w-[300px] overflow-hidden">
+    <Card className="w-full sm:max-w-[300px] overflow-hidden">
       <CardHeader className="p-0">
         <div
-          className="aspect-square relative hover:cursor-pointer"
+          className="relative hover:cursor-pointer"
           onClick={() => navigate(`/book/${book?.id}`)}
         >
           <img
             src={book.image}
             alt={book.name}
-            className="object-contain w-full h-[300px]"
+            className="w-full h-[250px] object-contain rounded-t-lg"
           />
         </div>
       </CardHeader>

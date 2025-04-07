@@ -5,10 +5,10 @@ import { Button } from "../ui/button";
 const Header = () => {
   return (
     <header className="w-full border-b">
-      <div className="max-w-7xl lg:mx-auto p-5 md:px-10 w-full flex justify-between">
+      <div className="max-w-7xl lg:mx-auto p-5 md:px-7 w-full flex justify-between">
         <div className="flex-start">
           <Link to="/" className="flex-start">
-            <span className="block font-bold text-2xl ml-3">Zepto Books</span>
+            <span className="block font-bold text-2xl">Zepto Books</span>
           </Link>
         </div>
 
